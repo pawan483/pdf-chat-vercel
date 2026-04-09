@@ -145,14 +145,12 @@ Answer:"""
     }
 
 
-@app.get("/")
-def root():
-    return {
-        "message": "PDF Chat Assistant API is running on Vercel"
-    }
+@app.get("/api/health")
+def health():
+    return {"message": "PDF Chat Assistant API is running"}
 
 
-@app.post("/upload-pdf")
+@app.post("/api/upload-pdf")
 async def upload_pdf(file: UploadFile = File(...)):
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
@@ -171,7 +169,7 @@ async def upload_pdf(file: UploadFile = File(...)):
             os.remove(temp_path)
 
 
-@app.post("/ask")
+@app.post("/api/ask")
 async def ask_question(request: AskRequest):
     if not request.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
@@ -183,7 +181,7 @@ async def ask_question(request: AskRequest):
     return result
 
 
-@app.post("/upload-and-ask")
+@app.post("/api/upload-and-ask")
 async def upload_and_ask(
     message: str = Form(...),
     file: UploadFile = File(...)
