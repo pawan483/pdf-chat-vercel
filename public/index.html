@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Chat Agent</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-card">
+        <div class="brand-badge">AI</div>
+        <div>
+          <h1>PDF Chat Agent</h1>
+          <p>Ask questions from uploaded documents</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Upload PDF</h2>
+        <input type="file" id="pdfFile" accept=".pdf" />
+        <button id="uploadBtn">Process PDF</button>
+        <div id="uploadStatus" class="status-text">No PDF uploaded yet.</div>
+      </div>
+
+      <div class="panel">
+        <h2>Agent Status</h2>
+        <div class="status-pill">Groq Connected</div>
+        <div class="status-pill">Vercel Deployed</div>
+        <div class="status-pill">PDF Ready After Upload</div>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="topbar">
+        <div>
+          <h2>Document Intelligence Agent</h2>
+          <p>Upload a PDF and start chatting with your file</p>
+        </div>
+      </header>
+
+      <section id="chatMessages" class="chat-messages">
+        <div class="message bot">
+          <div class="avatar">AI</div>
+          <div class="bubble">
+            Hello! Upload a PDF from the left panel, then ask me anything about it.
+          </div>
+        </div>
+      </section>
+
+      <section class="composer">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Ask a question about your PDF..."
+        />
+        <button id="sendBtn">Send</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
