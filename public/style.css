@@ -1,0 +1,229 @@
+:root {
+  --bg: #0b1020;
+  --panel: #121932;
+  --panel-2: #18213f;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f5f7ff;
+  --muted: #94a3b8;
+  --primary: #5eead4;
+  --primary-dark: #14b8a6;
+  --user: #2563eb;
+  --bot: #1e293b;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 25%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: rgba(10, 14, 29, 0.9);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand-card,
+.panel,
+.topbar,
+.composer,
+.bubble {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.brand-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(94, 234, 212, 0.08), rgba(255, 255, 255, 0.03));
+}
+
+.brand-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #04111d;
+  font-weight: 800;
+}
+
+.brand-card h1,
+.topbar h2,
+.panel h2 {
+  margin: 0 0 6px;
+}
+
+.brand-card p,
+.topbar p,
+.status-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.panel {
+  background: rgba(18, 25, 50, 0.82);
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.panel input[type="file"] {
+  width: 100%;
+  margin: 12px 0;
+  color: var(--muted);
+}
+
+button {
+  background: linear-gradient(135deg, var(--primary), #2dd4bf);
+  color: #04111d;
+  border: none;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.status-pill {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.chat-area {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 24px;
+  gap: 18px;
+}
+
+.topbar {
+  background: rgba(18, 25, 50, 0.78);
+  padding: 20px 22px;
+  border-radius: 22px;
+}
+
+.chat-messages {
+  background: rgba(8, 12, 25, 0.45);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #334155, #0f172a);
+  flex-shrink: 0;
+}
+
+.message.user .avatar {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.bubble {
+  max-width: min(75%, 760px);
+  padding: 16px 18px;
+  border-radius: 18px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.message.bot .bubble {
+  background: var(--bot);
+}
+
+.message.user .bubble {
+  background: var(--user);
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  background: rgba(18, 25, 50, 0.82);
+  padding: 16px;
+  border-radius: 20px;
+}
+
+.composer input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  padding: 14px 16px;
+  outline: none;
+}
+
+.composer input::placeholder {
+  color: #7c8aa5;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bubble {
+    max-width: 100%;
+  }
+}
