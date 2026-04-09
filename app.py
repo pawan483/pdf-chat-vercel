@@ -4,6 +4,8 @@ import tempfile
 from typing import List, Dict, Any
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.responses import RedirectResponse
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
@@ -20,47 +22,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from fastapi.responses import HTMLResponse
-
-@app.get("/", response_class=HTMLResponse)
-def home():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>PDF Chat Agent</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background: #0b1020;
-                color: white;
-                display: grid;
-                place-items: center;
-                min-height: 100vh;
-                margin: 0;
-            }
-            .box {
-                max-width: 700px;
-                padding: 24px;
-                border-radius: 16px;
-                background: #121932;
-                border: 1px solid rgba(255,255,255,0.08);
-            }
-            a {
-                color: #5eead4;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="box">
-            <h1>PDF Chat Assistant API is live</h1>
-            <p>Your backend is deployed successfully.</p>
-            <p>If you want the full chatbot UI, make sure <b>public/index.html</b> exists in your repo.</p>
-            <p>Health check: <a href="/api/health">/api/health</a></p>
-        </div>
-    </body>
-    </html>
-    """
+@app.get("/", include_in_schema=False)
+async def root():
+    return RedirectResponse(url="/index.html")
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 retriever_global: List[Dict[str, Any]] = []
