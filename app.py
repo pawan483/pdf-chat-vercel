@@ -9,6 +9,17 @@ from pydantic import BaseModel
 from groq import Groq
 from pypdf import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+app = FastAPI(title="PDF Chat Assistant API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 from fastapi.responses import HTMLResponse
 
 @app.get("/", response_class=HTMLResponse)
@@ -50,16 +61,6 @@ def home():
     </body>
     </html>
     """
-
-app = FastAPI(title="PDF Chat Assistant API")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 retriever_global: List[Dict[str, Any]] = []
